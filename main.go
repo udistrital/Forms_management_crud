@@ -6,7 +6,7 @@ import (
 	"github.com/astaxie/beego/orm"
 	"github.com/astaxie/beego/plugins/cors"
 	_ "github.com/lib/pq"
-	_ "github.com/udistrital/forms_management_crud/routers"
+	_ "github.com/planesticud/forms_management_crud/routers"
 	apistatus "github.com/udistrital/utils_oas/apiStatusLib"
 )
 
