@@ -8,9 +8,8 @@
 package routers
 
 import (
-	"github.com/planesticud/forms_management_crud/controllers"
-
 	"github.com/astaxie/beego"
+	"github.com/planesticud/forms_management_crud/controllers"
 )
 
 func init() {
