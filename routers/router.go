@@ -8,7 +8,7 @@
 package routers
 
 import (
-	"github.com/udistrital/forms_management_crud/controllers"
+	"github.com/planesticud/forms_management_crud/controllers"
 
 	"github.com/astaxie/beego"
 )

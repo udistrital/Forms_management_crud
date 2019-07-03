@@ -11,7 +11,7 @@ Go version >= 1.8.
 
 ## Preparación:
     Para usar el API, usar el comando:
-        - go get github.com/udistrital/forms_management_crud
+        - go get github.com/planesticud/forms_management_crud
 
 ## Run
 
@@ -24,7 +24,7 @@ Definir los valores de las siguientes variables de entorno:
  - `FORMS_MANAGEMENT_CRUD__PGDB`: Nombre de la base de datos
  - `FORMS_MANAGEMENT_CRUD__SCHEMA`: Esquema a utilizar en la base de datos
 
-Ejemplo: API_FORMS_MANAGEMENT_HTTP_PORT=8083 FORMS_MANAGEMENT_CRUD__PGUSER=user FORMS_MANAGEMENT_CRUD__PGPASS=password FORMS_MANAGEMENT_CRUD__PGURLS=localhost FORMS_MANAGEMENT_CRUD__PGDB=udistrital_core_db FORMS_MANAGEMENT_CRUD__SCHEMA=core_new bee run
+Ejemplo: API_FORMS_MANAGEMENT_HTTP_PORT=8083 FORMS_MANAGEMENT_CRUD__PGUSER=user FORMS_MANAGEMENT_CRUD__PGPASS=password FORMS_MANAGEMENT_CRUD__PGURLS=localhost FORMS_MANAGEMENT_CRUD__PGDB=planesticud_core_db FORMS_MANAGEMENT_CRUD__SCHEMA=core_new bee run
 
 ## MODELO
-![image](https://github.com/udistrital/forms_management_crud/blob/dev/estadoVfinal.png).
+![image](https://github.com/planesticud/forms_management_crud/blob/dev/estadoVfinal.png).
