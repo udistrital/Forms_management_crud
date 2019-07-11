@@ -5,50 +5,57 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/astaxie/beego/orm"
 )
 
-type Campo struct {
-	Id           int         `orm:"column(id);pk;auto"`
-	NombreCampo  string      `orm:"column(nombre_campo)"`
-	IdTipoEstado *TipoEstado `orm:"column(id_tipo_estado);rel(fk)"`
-	IdFormulario *Formulario `orm:"column(id_formulario);rel(fk)"`
+type CampoPrograma struct {
+	Id                 int                 `orm:"column(id);pk;auto"`
+	Nombre             string              `orm:"column(nombre)"`
+	Periodo            int                 `orm:"column(periodo)"`
+	TipoEstado         *TipoEstado         `orm:"column(tipo_estado);rel(fk)"`
+	FormularioPrograma *FormularioPrograma `orm:"column(formulario_programa);rel(fk)"`
+	Activo             bool                `orm:"column(activo)"`
+	FechaModificacion  string              `orm:"column(fecha_modificacion);null"`
 }
 
-func (t *Campo) TableName() string {
-	return "campo"
+func (t *CampoPrograma) TableName() string {
+	return "campo_programa"
 }
 
 func init() {
-	orm.RegisterModel(new(Campo))
+	orm.RegisterModel(new(CampoPrograma))
 }
 
-// AddCampo insert a new Campo into database and returns
+// AddCampoPrograma insert a new CampoPrograma into database and returns
 // last inserted Id on success.
-func AddCampo(m *Campo) (id int64, err error) {
+func AddCampoPrograma(m *CampoPrograma) (id int64, err error) {
+	var t time.Time
+	t = time.Now()
+	m.FechaModificacion = fmt.Sprintf("%s", t.UTC().Format(time.UnixDate))
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
 }
 
-// GetCampoById retrieves Campo by Id. Returns error if
+// GetCampoProgramaById retrieves CampoPrograma by Id. Returns error if
 // Id doesn't exist
-func GetCampoById(id int) (v *Campo, err error) {
+func GetCampoProgramaById(id int) (v *CampoPrograma, err error) {
 	o := orm.NewOrm()
-	v = &Campo{Id: id}
+	v = &CampoPrograma{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllCampo retrieves all Campo matches certain condition. Returns empty list if
+// GetAllCampoPrograma retrieves all CampoPrograma matches certain condition. Returns empty list if
 // no records exist
-func GetAllCampo(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllCampoPrograma(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Campo))
+	qs := o.QueryTable(new(CampoPrograma))
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -98,7 +105,7 @@ func GetAllCampo(query map[string]string, fields []string, sortby []string, orde
 		}
 	}
 
-	var l []Campo
+	var l []CampoPrograma
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -121,11 +128,14 @@ func GetAllCampo(query map[string]string, fields []string, sortby []string, orde
 	return nil, err
 }
 
-// UpdateCampo updates Campo by Id and returns error if
+// UpdateCampoPrograma updates CampoPrograma by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateCampoById(m *Campo) (err error) {
+func UpdateCampoProgramaById(m *CampoPrograma) (err error) {
 	o := orm.NewOrm()
-	v := Campo{Id: m.Id}
+	v := CampoPrograma{Id: m.Id}
+	var t time.Time
+	t = time.Now()
+	m.FechaModificacion = fmt.Sprintf("%s", t.UTC().Format(time.UnixDate))
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -136,15 +146,15 @@ func UpdateCampoById(m *Campo) (err error) {
 	return
 }
 
-// DeleteCampo deletes Campo by Id and returns error if
+// DeleteCampoPrograma deletes CampoPrograma by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteCampo(id int) (err error) {
+func DeleteCampoPrograma(id int) (err error) {
 	o := orm.NewOrm()
-	v := Campo{Id: id}
+	v := CampoPrograma{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&Campo{Id: id}); err == nil {
+		if num, err = o.Delete(&CampoPrograma{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

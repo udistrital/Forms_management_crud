@@ -21,15 +21,15 @@ func init() {
 			),
 		),
 
-		beego.NSNamespace("/formulario",
+		beego.NSNamespace("/formulario_programa",
 			beego.NSInclude(
-				&controllers.FormularioController{},
+				&controllers.FormularioProgramaController{},
 			),
 		),
 
-		beego.NSNamespace("/campo",
+		beego.NSNamespace("/campo_programa",
 			beego.NSInclude(
-				&controllers.CampoController{},
+				&controllers.CampoProgramaController{},
 			),
 		),
 	)

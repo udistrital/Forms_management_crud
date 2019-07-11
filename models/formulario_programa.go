@@ -5,52 +5,58 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
+	"time"
 
 	"github.com/astaxie/beego/orm"
 )
 
-type Formulario struct {
+type FormularioPrograma struct {
 	Id                int     `orm:"column(id);pk;auto"`
+	Programa          int     `orm:"column(programa)"`
 	Nombre            string  `orm:"column(nombre)"`
 	Descripcion       string  `orm:"column(descripcion);null"`
 	CodigoAbreviacion string  `orm:"column(codigo_abreviacion);null"`
 	Activo            bool    `orm:"column(activo)"`
 	NumeroOrden       float64 `orm:"column(numero_orden);null"`
+	FechaModificacion string  `orm:"column(fecha_modificacion);null"`
 }
 
-func (t *Formulario) TableName() string {
-	return "formulario"
+func (t *FormularioPrograma) TableName() string {
+	return "formulario_programa"
 }
 
 func init() {
-	orm.RegisterModel(new(Formulario))
+	orm.RegisterModel(new(FormularioPrograma))
 }
 
-// AddFormulario insert a new Formulario into database and returns
+// AddFormularioPrograma insert a new FormularioPrograma into database and returns
 // last inserted Id on success.
-func AddFormulario(m *Formulario) (id int64, err error) {
+func AddFormularioPrograma(m *FormularioPrograma) (id int64, err error) {
+	var t time.Time
+	t = time.Now()
+	m.FechaModificacion = fmt.Sprintf("%s", t.UTC().Format(time.UnixDate))
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
 }
 
-// GetFormularioById retrieves Formulario by Id. Returns error if
+// GetFormularioById retrieves FormularioPrograma by Id. Returns error if
 // Id doesn't exist
-func GetFormularioById(id int) (v *Formulario, err error) {
+func GetFormularioProgramaById(id int) (v *FormularioPrograma, err error) {
 	o := orm.NewOrm()
-	v = &Formulario{Id: id}
+	v = &FormularioPrograma{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllFormulario retrieves all Formulario matches certain condition. Returns empty list if
+// GetAllFormularioPrograma retrieves all FormularioPrograma matches certain condition. Returns empty list if
 // no records exist
-func GetAllFormulario(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllFormularioPrograma(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Formulario))
+	qs := o.QueryTable(new(FormularioPrograma))
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -100,7 +106,7 @@ func GetAllFormulario(query map[string]string, fields []string, sortby []string,
 		}
 	}
 
-	var l []Formulario
+	var l []FormularioPrograma
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -123,11 +129,14 @@ func GetAllFormulario(query map[string]string, fields []string, sortby []string,
 	return nil, err
 }
 
-// UpdateFormulario updates Formulario by Id and returns error if
+// UpdateFormularioPrograma updates FormularioPrograma by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateFormularioById(m *Formulario) (err error) {
+func UpdateFormularioProgramaById(m *FormularioPrograma) (err error) {
 	o := orm.NewOrm()
-	v := Formulario{Id: m.Id}
+	v := FormularioPrograma{Id: m.Id}
+	var t time.Time
+	t = time.Now()
+	m.FechaModificacion = fmt.Sprintf("%s", t.UTC().Format(time.UnixDate))
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
@@ -138,15 +147,15 @@ func UpdateFormularioById(m *Formulario) (err error) {
 	return
 }
 
-// DeleteFormulario deletes Formulario by Id and returns error if
+// DeleteFormularioPrograma deletes FormularioPrograma by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteFormulario(id int) (err error) {
+func DeleteFormularioPrograma(id int) (err error) {
 	o := orm.NewOrm()
-	v := Formulario{Id: id}
+	v := FormularioPrograma{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&Formulario{Id: id}); err == nil {
+		if num, err = o.Delete(&FormularioPrograma{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}
