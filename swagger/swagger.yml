@@ -48,8 +48,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.CampoPrograma'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - campo_programa
@@ -65,8 +65,8 @@ paths:
       responses:
         "201":
           description: '{int} models.CampoPrograma'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /campo_programa/{id}:
     get:
       tags:
@@ -84,8 +84,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.CampoPrograma'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - campo_programa
@@ -108,8 +108,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.CampoPrograma'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - campo_programa
@@ -124,8 +124,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /formulario_programa/:
     get:
       tags:
@@ -163,8 +163,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.FormularioPrograma'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - formulario_programa
@@ -180,8 +180,8 @@ paths:
       responses:
         "201":
           description: '{int} models.FormularioPrograma'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /formulario_programa/{id}:
     get:
       tags:
@@ -199,8 +199,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.FormularioPrograma'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - formulario_programa
@@ -223,8 +223,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.FormularioPrograma'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - formulario_programa
@@ -239,8 +239,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
   /tipo_estado/:
     get:
       tags:
@@ -278,8 +278,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoEstado'
-        "403":
-          description: ""
+        "404":
+          description: not found resource
     post:
       tags:
       - tipo_estado
@@ -295,8 +295,8 @@ paths:
       responses:
         "201":
           description: '{int} models.TipoEstado'
-        "403":
-          description: body is empty
+        "400":
+          description: the request contains incorrect syntax
   /tipo_estado/{id}:
     get:
       tags:
@@ -314,8 +314,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoEstado'
-        "403":
-          description: :id is empty
+        "404":
+          description: not found resource
     put:
       tags:
       - tipo_estado
@@ -338,8 +338,8 @@ paths:
           description: ""
           schema:
             $ref: '#/definitions/models.TipoEstado'
-        "403":
-          description: :id is not int
+        "400":
+          description: the request contains incorrect syntax
     delete:
       tags:
       - tipo_estado
@@ -354,8 +354,8 @@ paths:
       responses:
         "200":
           description: '{string} delete success!'
-        "403":
-          description: id is empty
+        "404":
+          description: not found resource
 definitions:
   models.CampoPrograma:
     title: CampoPrograma
@@ -363,6 +363,8 @@ definitions:
     properties:
       Activo:
         type: boolean
+      FechaCreacion:
+        type: string
       FechaModificacion:
         type: string
       FormularioPrograma:
@@ -387,6 +389,8 @@ definitions:
         type: string
       Descripcion:
         type: string
+      FechaCreacion:
+        type: string
       FechaModificacion:
         type: string
       Id:
@@ -409,6 +413,8 @@ definitions:
       CodigoAbreviacion:
         type: string
       Descripcion:
+        type: string
+      FechaCreacion:
         type: string
       FechaModificacion:
         type: string

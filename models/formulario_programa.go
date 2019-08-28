@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"reflect"
 	"strings"
-	"time"
 
 	"github.com/astaxie/beego/orm"
+	"github.com/udistrital/utils_oas/time_bogota"
 )
 
 type FormularioPrograma struct {
@@ -18,6 +18,7 @@ type FormularioPrograma struct {
 	CodigoAbreviacion string  `orm:"column(codigo_abreviacion);null"`
 	Activo            bool    `orm:"column(activo)"`
 	NumeroOrden       float64 `orm:"column(numero_orden);null"`
+	FechaCreacion     string  `orm:"column(fecha_creacion);null"`
 	FechaModificacion string  `orm:"column(fecha_modificacion);null"`
 }
 
@@ -32,9 +33,8 @@ func init() {
 // AddFormularioPrograma insert a new FormularioPrograma into database and returns
 // last inserted Id on success.
 func AddFormularioPrograma(m *FormularioPrograma) (id int64, err error) {
-	var t time.Time
-	t = time.Now()
-	m.FechaModificacion = fmt.Sprintf("%s", t.UTC().Format(time.UnixDate))
+	m.FechaCreacion = time_bogota.TiempoBogotaFormato()
+	m.FechaModificacion = time_bogota.TiempoBogotaFormato()
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
@@ -134,9 +134,7 @@ func GetAllFormularioPrograma(query map[string]string, fields []string, sortby [
 func UpdateFormularioProgramaById(m *FormularioPrograma) (err error) {
 	o := orm.NewOrm()
 	v := FormularioPrograma{Id: m.Id}
-	var t time.Time
-	t = time.Now()
-	m.FechaModificacion = fmt.Sprintf("%s", t.UTC().Format(time.UnixDate))
+	m.FechaModificacion = time_bogota.TiempoBogotaFormato()
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
