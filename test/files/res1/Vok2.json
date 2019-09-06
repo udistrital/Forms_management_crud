@@ -1,0 +1,14 @@
+{
+  "title": "Example Schema",
+  "type": "object",
+  "properties": {
+    "Id": { "type": "integer" },
+    "Nombre": { "type": "string" },
+    "Periodo": { "type": "integer" },
+    "TipoEstado":	{ "type": "TipoEstado" },
+    "FormularioPrograma":	{ "type": "FormularioPrograma" },
+    "Activo": { "type": "boolean" },
+    "FechaCreacion": { "type": "string" },
+    "FechaModificacion": { "type": "string" }
+  }
+}

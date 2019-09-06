@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/astaxie/beego"
+	"github.com/astaxie/beego/logs"
 	"github.com/planesticud/forms_management_crud/models"
 )
 
@@ -37,13 +38,13 @@ func (c *CampoProgramaController) Post() {
 			c.Ctx.Output.SetStatus(201)
 			c.Data["json"] = v
 		} else {
-			beego.Error(err)
+			logs.Error(err)
 			//c.Data["development"] = map[string]interface{}{"Code": "400", "Body": err.Error(), "Type": "error"}
 			c.Data["system"] = err
 			c.Abort("400")
 		}
 	} else {
-		beego.Error(err)
+		logs.Error(err)
 		//c.Data["development"] = map[string]interface{}{"Code": "400", "Body": err.Error(), "Type": "error"}
 		c.Data["system"] = err
 		c.Abort("400")
@@ -63,7 +64,7 @@ func (c *CampoProgramaController) GetOne() {
 	id, _ := strconv.Atoi(idStr)
 	v, err := models.GetCampoProgramaById(id)
 	if err != nil {
-		beego.Error(err)
+		logs.Error(err)
 		//c.Data["development"] = map[string]interface{}{"Code": "404", "Body": err.Error(), "Type": "error"}
 		c.Data["system"] = err
 		c.Abort("404")
@@ -129,7 +130,7 @@ func (c *CampoProgramaController) GetAll() {
 
 	l, err := models.GetAllCampoPrograma(query, fields, sortby, order, offset, limit)
 	if err != nil {
-		beego.Error(err)
+		logs.Error(err)
 		//c.Data["development"] = map[string]interface{}{"Code": "404", "Body": err.Error(), "Type": "error"}
 		c.Data["system"] = err
 		c.Abort("404")
@@ -159,13 +160,13 @@ func (c *CampoProgramaController) Put() {
 			c.Ctx.Output.SetStatus(200)
 			c.Data["json"] = v
 		} else {
-			beego.Error(err)
+			logs.Error(err)
 			//c.Data["development"] = map[string]interface{}{"Code": "400", "Body": err.Error(), "Type": "error"}
 			c.Data["System"] = err
 			c.Abort("400")
 		}
 	} else {
-		beego.Error(err)
+		logs.Error(err)
 		//c.Data["development"] = map[string]interface{}{"Code": "400", "Body": err.Error(), "Type": "error"}
 		c.Data["System"] = err
 		c.Abort("400")
@@ -186,7 +187,7 @@ func (c *CampoProgramaController) Delete() {
 	if err := models.DeleteCampoPrograma(id); err == nil {
 		c.Data["json"] = map[string]interface{}{"Id": id}
 	} else {
-		beego.Error(err)
+		logs.Error(err)
 		//c.Data["development"] = map[string]interface{}{"Code": "404", "Body": err.Error(), "Type": "error"}
 		c.Data["System"] = err
 		c.Abort("404")
