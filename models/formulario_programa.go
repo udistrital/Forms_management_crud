@@ -7,48 +7,56 @@ import (
 	"strings"
 
 	"github.com/astaxie/beego/orm"
+	"github.com/udistrital/utils_oas/time_bogota"
 )
 
-type Campo struct {
-	Id           int         `orm:"column(id);pk;auto"`
-	NombreCampo  string      `orm:"column(nombre_campo)"`
-	IdTipoEstado *TipoEstado `orm:"column(id_tipo_estado);rel(fk)"`
-	IdFormulario *Formulario `orm:"column(id_formulario);rel(fk)"`
+type FormularioPrograma struct {
+	Id                int     `orm:"column(id);pk;auto"`
+	Programa          int     `orm:"column(programa)"`
+	Nombre            string  `orm:"column(nombre)"`
+	Descripcion       string  `orm:"column(descripcion);null"`
+	CodigoAbreviacion string  `orm:"column(codigo_abreviacion);null"`
+	Activo            bool    `orm:"column(activo)"`
+	NumeroOrden       float64 `orm:"column(numero_orden);null"`
+	FechaCreacion     string  `orm:"column(fecha_creacion);null"`
+	FechaModificacion string  `orm:"column(fecha_modificacion);null"`
 }
 
-func (t *Campo) TableName() string {
-	return "campo"
+func (t *FormularioPrograma) TableName() string {
+	return "formulario_programa"
 }
 
 func init() {
-	orm.RegisterModel(new(Campo))
+	orm.RegisterModel(new(FormularioPrograma))
 }
 
-// AddCampo insert a new Campo into database and returns
+// AddFormularioPrograma insert a new FormularioPrograma into database and returns
 // last inserted Id on success.
-func AddCampo(m *Campo) (id int64, err error) {
+func AddFormularioPrograma(m *FormularioPrograma) (id int64, err error) {
+	m.FechaCreacion = time_bogota.TiempoBogotaFormato()
+	m.FechaModificacion = time_bogota.TiempoBogotaFormato()
 	o := orm.NewOrm()
 	id, err = o.Insert(m)
 	return
 }
 
-// GetCampoById retrieves Campo by Id. Returns error if
+// GetFormularioById retrieves FormularioPrograma by Id. Returns error if
 // Id doesn't exist
-func GetCampoById(id int) (v *Campo, err error) {
+func GetFormularioProgramaById(id int) (v *FormularioPrograma, err error) {
 	o := orm.NewOrm()
-	v = &Campo{Id: id}
+	v = &FormularioPrograma{Id: id}
 	if err = o.Read(v); err == nil {
 		return v, nil
 	}
 	return nil, err
 }
 
-// GetAllCampo retrieves all Campo matches certain condition. Returns empty list if
+// GetAllFormularioPrograma retrieves all FormularioPrograma matches certain condition. Returns empty list if
 // no records exist
-func GetAllCampo(query map[string]string, fields []string, sortby []string, order []string,
+func GetAllFormularioPrograma(query map[string]string, fields []string, sortby []string, order []string,
 	offset int64, limit int64) (ml []interface{}, err error) {
 	o := orm.NewOrm()
-	qs := o.QueryTable(new(Campo))
+	qs := o.QueryTable(new(FormularioPrograma))
 	// query k=v
 	for k, v := range query {
 		// rewrite dot-notation to Object__Attribute
@@ -98,7 +106,7 @@ func GetAllCampo(query map[string]string, fields []string, sortby []string, orde
 		}
 	}
 
-	var l []Campo
+	var l []FormularioPrograma
 	qs = qs.OrderBy(sortFields...)
 	if _, err = qs.Limit(limit, offset).All(&l, fields...); err == nil {
 		if len(fields) == 0 {
@@ -121,30 +129,31 @@ func GetAllCampo(query map[string]string, fields []string, sortby []string, orde
 	return nil, err
 }
 
-// UpdateCampo updates Campo by Id and returns error if
+// UpdateFormularioPrograma updates FormularioPrograma by Id and returns error if
 // the record to be updated doesn't exist
-func UpdateCampoById(m *Campo) (err error) {
+func UpdateFormularioProgramaById(m *FormularioPrograma) (err error) {
 	o := orm.NewOrm()
-	v := Campo{Id: m.Id}
+	v := FormularioPrograma{Id: m.Id}
+	m.FechaModificacion = time_bogota.TiempoBogotaFormato()
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Update(m); err == nil {
+		if num, err = o.Update(m, "Programa", "Nombre", "Descripcion", "CodigoAbreviacion", "Activo", "NumeroOrden", "FechaModificacion"); err == nil {
 			fmt.Println("Number of records updated in database:", num)
 		}
 	}
 	return
 }
 
-// DeleteCampo deletes Campo by Id and returns error if
+// DeleteFormularioPrograma deletes FormularioPrograma by Id and returns error if
 // the record to be deleted doesn't exist
-func DeleteCampo(id int) (err error) {
+func DeleteFormularioPrograma(id int) (err error) {
 	o := orm.NewOrm()
-	v := Campo{Id: id}
+	v := FormularioPrograma{Id: id}
 	// ascertain id exists in the database
 	if err = o.Read(&v); err == nil {
 		var num int64
-		if num, err = o.Delete(&Campo{Id: id}); err == nil {
+		if num, err = o.Delete(&FormularioPrograma{Id: id}); err == nil {
 			fmt.Println("Number of records deleted in database:", num)
 		}
 	}

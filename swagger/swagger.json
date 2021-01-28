@@ -15,13 +15,13 @@
     },
     "basePath": "/v1",
     "paths": {
-        "/campo/": {
+        "/campo_programa/": {
             "get": {
                 "tags": [
-                    "campo"
+                    "campo_programa"
                 ],
-                "description": "get Campo",
-                "operationId": "CampoController.Get All",
+                "description": "get CampoPrograma",
+                "operationId": "CampoProgramaController.Get All",
                 "parameters": [
                     {
                         "in": "query",
@@ -64,48 +64,48 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Campo"
+                            "$ref": "#/definitions/models.CampoPrograma"
                         }
                     },
-                    "403": {
-                        "description": ""
+                    "404": {
+                        "description": "not found resource"
                     }
                 }
             },
             "post": {
                 "tags": [
-                    "campo"
+                    "campo_programa"
                 ],
-                "description": "create Campo",
-                "operationId": "CampoController.Post",
+                "description": "create CampoPrograma",
+                "operationId": "CampoProgramaController.Post",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "body for Campo content",
+                        "description": "body for CampoPrograma content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Campo"
+                            "$ref": "#/definitions/models.CampoPrograma"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.Campo"
+                        "description": "{int} models.CampoPrograma"
                     },
-                    "403": {
-                        "description": "body is empty"
+                    "400": {
+                        "description": "the request contains incorrect syntax"
                     }
                 }
             }
         },
-        "/campo/{id}": {
+        "/campo_programa/{id}": {
             "get": {
                 "tags": [
-                    "campo"
+                    "campo_programa"
                 ],
-                "description": "get Campo by id",
-                "operationId": "CampoController.Get One",
+                "description": "get CampoPrograma by id",
+                "operationId": "CampoProgramaController.Get One",
                 "parameters": [
                     {
                         "in": "path",
@@ -119,20 +119,20 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Campo"
+                            "$ref": "#/definitions/models.CampoPrograma"
                         }
                     },
-                    "403": {
-                        "description": ":id is empty"
+                    "404": {
+                        "description": "not found resource"
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "campo"
+                    "campo_programa"
                 ],
-                "description": "update the Campo",
-                "operationId": "CampoController.Put",
+                "description": "update the CampoPrograma",
+                "operationId": "CampoProgramaController.Put",
                 "parameters": [
                     {
                         "in": "path",
@@ -144,10 +144,10 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "body for Campo content",
+                        "description": "body for CampoPrograma content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Campo"
+                            "$ref": "#/definitions/models.CampoPrograma"
                         }
                     }
                 ],
@@ -155,20 +155,20 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Campo"
+                            "$ref": "#/definitions/models.CampoPrograma"
                         }
                     },
-                    "403": {
-                        "description": ":id is not int"
+                    "400": {
+                        "description": "the request contains incorrect syntax"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "campo"
+                    "campo_programa"
                 ],
-                "description": "delete the Campo",
-                "operationId": "CampoController.Delete",
+                "description": "delete the CampoPrograma",
+                "operationId": "CampoProgramaController.Delete",
                 "parameters": [
                     {
                         "in": "path",
@@ -182,19 +182,19 @@
                     "200": {
                         "description": "{string} delete success!"
                     },
-                    "403": {
-                        "description": "id is empty"
+                    "404": {
+                        "description": "not found resource"
                     }
                 }
             }
         },
-        "/formulario/": {
+        "/formulario_programa/": {
             "get": {
                 "tags": [
-                    "formulario"
+                    "formulario_programa"
                 ],
-                "description": "get Formulario",
-                "operationId": "FormularioController.Get All",
+                "description": "get FormularioPrograma",
+                "operationId": "FormularioProgramaController.Get All",
                 "parameters": [
                     {
                         "in": "query",
@@ -237,48 +237,48 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Formulario"
+                            "$ref": "#/definitions/models.FormularioPrograma"
                         }
                     },
-                    "403": {
-                        "description": ""
+                    "404": {
+                        "description": "not found resource"
                     }
                 }
             },
             "post": {
                 "tags": [
-                    "formulario"
+                    "formulario_programa"
                 ],
-                "description": "create Formulario",
-                "operationId": "FormularioController.Post",
+                "description": "create FormularioPrograma",
+                "operationId": "FormularioProgramaController.Post",
                 "parameters": [
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "body for Formulario content",
+                        "description": "body for FormularioPrograma content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Formulario"
+                            "$ref": "#/definitions/models.FormularioPrograma"
                         }
                     }
                 ],
                 "responses": {
                     "201": {
-                        "description": "{int} models.Formulario"
+                        "description": "{int} models.FormularioPrograma"
                     },
-                    "403": {
-                        "description": "body is empty"
+                    "400": {
+                        "description": "the request contains incorrect syntax"
                     }
                 }
             }
         },
-        "/formulario/{id}": {
+        "/formulario_programa/{id}": {
             "get": {
                 "tags": [
-                    "formulario"
+                    "formulario_programa"
                 ],
-                "description": "get Formulario by id",
-                "operationId": "FormularioController.Get One",
+                "description": "get FormularioPrograma by id",
+                "operationId": "FormularioProgramaController.Get One",
                 "parameters": [
                     {
                         "in": "path",
@@ -292,20 +292,20 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Formulario"
+                            "$ref": "#/definitions/models.FormularioPrograma"
                         }
                     },
-                    "403": {
-                        "description": ":id is empty"
+                    "404": {
+                        "description": "not found resource"
                     }
                 }
             },
             "put": {
                 "tags": [
-                    "formulario"
+                    "formulario_programa"
                 ],
-                "description": "update the Formulario",
-                "operationId": "FormularioController.Put",
+                "description": "update the FormularioPrograma",
+                "operationId": "FormularioProgramaController.Put",
                 "parameters": [
                     {
                         "in": "path",
@@ -317,10 +317,10 @@
                     {
                         "in": "body",
                         "name": "body",
-                        "description": "body for Formulario content",
+                        "description": "body for FormularioPrograma content",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/models.Formulario"
+                            "$ref": "#/definitions/models.FormularioPrograma"
                         }
                     }
                 ],
@@ -328,20 +328,20 @@
                     "200": {
                         "description": "",
                         "schema": {
-                            "$ref": "#/definitions/models.Formulario"
+                            "$ref": "#/definitions/models.FormularioPrograma"
                         }
                     },
-                    "403": {
-                        "description": ":id is not int"
+                    "400": {
+                        "description": "the request contains incorrect syntax"
                     }
                 }
             },
             "delete": {
                 "tags": [
-                    "formulario"
+                    "formulario_programa"
                 ],
-                "description": "delete the Formulario",
-                "operationId": "FormularioController.Delete",
+                "description": "delete the FormularioPrograma",
+                "operationId": "FormularioProgramaController.Delete",
                 "parameters": [
                     {
                         "in": "path",
@@ -355,8 +355,8 @@
                     "200": {
                         "description": "{string} delete success!"
                     },
-                    "403": {
-                        "description": "id is empty"
+                    "404": {
+                        "description": "not found resource"
                     }
                 }
             }
@@ -413,8 +413,8 @@
                             "$ref": "#/definitions/models.TipoEstado"
                         }
                     },
-                    "403": {
-                        "description": ""
+                    "404": {
+                        "description": "not found resource"
                     }
                 }
             },
@@ -439,8 +439,8 @@
                     "201": {
                         "description": "{int} models.TipoEstado"
                     },
-                    "403": {
-                        "description": "body is empty"
+                    "400": {
+                        "description": "the request contains incorrect syntax"
                     }
                 }
             }
@@ -468,8 +468,8 @@
                             "$ref": "#/definitions/models.TipoEstado"
                         }
                     },
-                    "403": {
-                        "description": ":id is empty"
+                    "404": {
+                        "description": "not found resource"
                     }
                 }
             },
@@ -504,8 +504,8 @@
                             "$ref": "#/definitions/models.TipoEstado"
                         }
                     },
-                    "403": {
-                        "description": ":id is not int"
+                    "400": {
+                        "description": "the request contains incorrect syntax"
                     }
                 }
             },
@@ -528,35 +528,48 @@
                     "200": {
                         "description": "{string} delete success!"
                     },
-                    "403": {
-                        "description": "id is empty"
+                    "404": {
+                        "description": "not found resource"
                     }
                 }
             }
         }
     },
     "definitions": {
-        "models.Campo": {
-            "title": "Campo",
+        "models.CampoPrograma": {
+            "title": "CampoPrograma",
             "type": "object",
             "properties": {
+                "Activo": {
+                    "type": "boolean"
+                },
+                "FechaCreacion": {
+                    "type": "string"
+                },
+                "FechaModificacion": {
+                    "type": "string"
+                },
+                "FormularioPrograma": {
+                    "$ref": "#/definitions/models.FormularioPrograma"
+                },
                 "Id": {
                     "type": "integer",
                     "format": "int64"
                 },
-                "IdFormulario": {
-                    "$ref": "#/definitions/models.Formulario"
-                },
-                "IdTipoEstado": {
-                    "$ref": "#/definitions/models.TipoEstado"
-                },
-                "NombreCampo": {
+                "Nombre": {
                     "type": "string"
+                },
+                "Periodo": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "TipoEstado": {
+                    "$ref": "#/definitions/models.TipoEstado"
                 }
             }
         },
-        "models.Formulario": {
-            "title": "Formulario",
+        "models.FormularioPrograma": {
+            "title": "FormularioPrograma",
             "type": "object",
             "properties": {
                 "Activo": {
@@ -566,6 +579,12 @@
                     "type": "string"
                 },
                 "Descripcion": {
+                    "type": "string"
+                },
+                "FechaCreacion": {
+                    "type": "string"
+                },
+                "FechaModificacion": {
                     "type": "string"
                 },
                 "Id": {
@@ -578,6 +597,10 @@
                 "NumeroOrden": {
                     "type": "number",
                     "format": "double"
+                },
+                "Programa": {
+                    "type": "integer",
+                    "format": "int64"
                 }
             }
         },
@@ -592,6 +615,12 @@
                     "type": "string"
                 },
                 "Descripcion": {
+                    "type": "string"
+                },
+                "FechaCreacion": {
+                    "type": "string"
+                },
+                "FechaModificacion": {
                     "type": "string"
                 },
                 "Id": {
@@ -614,12 +643,12 @@
             "description": "TipoEstadoController operations for TipoEstado\n"
         },
         {
-            "name": "formulario",
-            "description": "FormularioController operations for Formulario\n"
+            "name": "formulario_programa",
+            "description": "FormularioProgramaController operations for FormularioPrograma\n"
         },
         {
-            "name": "campo",
-            "description": "CampoController operations for Campo\n"
+            "name": "campo_programa",
+            "description": "CampoProgramaController operations for CampoPrograma\n"
         }
     ]
 }
